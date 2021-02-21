@@ -1,5 +1,6 @@
 import React from 'react'
 import "./course-editor.css"
+import {Link, Route} from "react-router-dom";
 
 const CourseEditor = () =>
   <div>
@@ -7,6 +8,10 @@ const CourseEditor = () =>
           <div className="row">
               <div className="col-1 nav-btn">
                   <i className="fa fa-times fa-2x"></i>
+                  &nbsp;
+                  <Link to="/">
+                      <i className="fas fa-2x fa-home"></i>
+                  </Link>
               </div>
               <div className="col-3 page-header">
                   <h5>CS5610-WebDev</h5>

@@ -69,6 +69,9 @@ class CourseManager extends React.Component {
                           <div className="row">
                               <div className="col-1 nav-btn">
                                   <i className="fa fa-bars fa-2x"></i>
+                                  <Link to="/">
+                                      <i className="fas fa-2x fa-home"></i>
+                                  </Link>
                               </div>
                               <div className="col-3 page-header d-none d-sm-block">
                                   <h5>Course Manager</h5>
