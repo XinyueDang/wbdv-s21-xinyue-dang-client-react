@@ -12,25 +12,37 @@ export default class CourseTable
  render() {
      return(
        <div>
-           <Link to="/courses/grid">
-             <i className="fas fa-2x fa-th float-right"></i>
-           </Link>
-         <h2>Course Table</h2>
          <table className="table">
-           <tbody>
+         <thead>
+            <tr>
+                <th>Title</th>
+                <th className="d-none d-md-table-cell">Owned By</th>
+                <th className="d-none d-lg-table-cell">Last Modified</th>
+                <th>
+                    <i className="fas fa-lg fa-folder"></i>
+                    &nbsp;
+                    <i className="fas fa-lg fa-sort-alpha-up"></i>
+                    &nbsp;
+                    <Link to="/courses/grid">
+                        <i className="fas fa-lg fa-th"></i>
+                    </Link>
+                </th>
+            </tr>
+         </thead>
+         <tbody>
            {
-             this.props.courses.map((course, ndx) =>
+             this.props.courses.map((course) =>
                <CourseRow
-                   updateCourse={this.props.updateCourse}
+                 updateCourse={this.props.updateCourse}
                  deleteCourse={this.props.deleteCourse}
-                 key={ndx}
+                 key={course._id}
                  course={course}
                  title={course.title}
                  owner={course.owner}
                  lastModified={course.lastModified}
                />)
            }
-           </tbody>
+         </tbody>
          </table>
        </div>
      )
