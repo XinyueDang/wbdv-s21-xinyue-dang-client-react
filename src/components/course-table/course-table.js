@@ -44,6 +44,9 @@ export default class CourseTable
            }
          </tbody>
          </table>
+         <button className="btn add-course-btn rounded-circle">
+             <i className="fa fa-plus fa-2x" onClick={this.props.addCourse}></i>
+         </button>
        </div>
      )
    }

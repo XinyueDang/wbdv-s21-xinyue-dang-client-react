@@ -2,7 +2,7 @@ import React from 'react'
 import CourseCard from "./course-card";
 import {Link} from "react-router-dom";
 
-const CourseGrid = ({courses, updateCourse, deleteCourse}) =>
+const CourseGrid = ({courses, updateCourse, deleteCourse, addCourse}) =>
   <div>
   <div className="row">
     <div className="col-4">
@@ -27,6 +27,7 @@ const CourseGrid = ({courses, updateCourse, deleteCourse}) =>
         <CourseCard
          updateCourse={updateCourse}
          deleteCourse={deleteCourse}
+         addCourse={addCourse}
          key={course._id}
          course={course}
          title={course.title}
@@ -35,6 +36,9 @@ const CourseGrid = ({courses, updateCourse, deleteCourse}) =>
       )
     }
     </div>
+    <button className="btn add-course-btn rounded-circle">
+         <i className="fa fa-plus fa-2x" onClick={addCourse}></i>
+     </button>
   </div>
 
 export default CourseGrid

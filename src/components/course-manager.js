@@ -87,20 +87,19 @@ class CourseManager extends React.Component {
                           </div>
                       </div>
               </div>
-              <button className="btn add-course-btn rounded-circle">
-                  <i className="fa fa-plus fa-2x" onClick={this.addCourse}></i>
-              </button>
               <div className="courses">
                   <Route path="/courses/table">
                     <CourseTable
                         updateCourse={this.updateCourse}
                         deleteCourse={this.deleteCourse}
+                        addCourse={this.addCourse}
                         courses={this.state.courses}/>
                   </Route>
                   <Route path="/courses/grid">
                     <CourseGrid
                         updateCourse={this.updateCourse}
                         deleteCourse={this.deleteCourse}
+                        addCourse={this.addCourse}
                         courses={this.state.courses}/>
                   </Route>
                   <Route path="/courses/editor"
