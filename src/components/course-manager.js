@@ -88,7 +88,7 @@ class CourseManager extends React.Component {
                       </div>
               </div>
               <div className="courses">
-                  <Route path="/courses/table">
+                  <Route path={["/courses", "/courses/table"]}>
                     <CourseTable
                         updateCourse={this.updateCourse}
                         deleteCourse={this.deleteCourse}
