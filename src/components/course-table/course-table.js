@@ -23,7 +23,7 @@ export default class CourseTable
                     &nbsp;
                     <i className="fas fa-lg fa-sort-alpha-up"></i>
                     &nbsp;
-                    <Link to="/courses/grid">
+                    <Link to="/courses/grid" exact>
                         <i className="fas fa-lg fa-th"></i>
                     </Link>
                 </th>
