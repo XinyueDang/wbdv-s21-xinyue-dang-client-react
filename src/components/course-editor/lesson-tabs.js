@@ -2,13 +2,21 @@ import React from 'react'
 import {connect} from 'react-redux'
 import EditableItem from '../editable-item'
 
-const LessonTabs = ({lessons=[]}) => {
+const LessonTabs = ({
+    lessons=[],
+    updateLesson,
+    deleteLesson
+}) => {
     return (
         <ul className="nav nav-tabs">
             {
             lessons.map(lesson => 
-                <li className="nav-item">  
-                    <EditableItem item={lesson}/>
+                <li className="nav-item">
+                    <EditableItem 
+                    deleteItem={deleteLesson}
+                    updateItem={updateLesson}
+                    item={lesson}
+                    />
                 </li>
             )}
         </ul>
@@ -21,7 +29,16 @@ const stpm = (state) => {
     }
 }
 const dtpm = (dispatch) => {
-
+    return {
+        deleteLesson: (item) => dispatch({ 
+            type: 'DELETE_LESSON', 
+            lessonToDelete: item
+        }),
+        updateLesson: (item) => dispatch({
+            type: 'UPDATE_LESSON', 
+            lessonToUpdate: item
+        })
+    }
 }
 
-export default connect(stpm)(LessonTabs)
+export default connect(stpm, dtpm)(LessonTabs)

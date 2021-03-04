@@ -5,7 +5,8 @@ import EditableItem from '../editable-item'
 const ModuleList = ({ 
     myModules = [], 
     createModule,
-    deleteModule
+    deleteModule,
+    updateModule
 }) => {
     return (
         <div>
@@ -14,12 +15,13 @@ const ModuleList = ({
                     <li className="list-group-item">
                         <EditableItem 
                         deleteItem={deleteModule}
+                        updateItem={updateModule}
                         item = {module}/>
                     </li>
                 ))}
                 <li className="list-group-item">
                     <i
-                        onClick={createModule}
+                        onClick={() => createModule()}
                         className="fas fa-plus fa-2x"
                     ></i>
                 </li>
@@ -39,7 +41,11 @@ const dtpm = (dispatch) => {
         deleteModule: (item) => dispatch({ 
                                 type: 'DELETE_MODULE', 
                                 moduleToDelete: item
-                        })
+                        }),
+        updateModule: (item) => dispatch({
+                                type: 'UPDATE_MODULE', 
+                                moduleToUpdate: item
+        })
     }
 }
 
