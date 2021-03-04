@@ -6,6 +6,7 @@ import "./course-manager.css";
 import {Link, Route} from "react-router-dom";
 import courseService from "../services/course-service";
 
+
 class CourseManager extends React.Component {
   state = {
     courses: [],
@@ -24,7 +25,6 @@ class CourseManager extends React.Component {
       courseService.findAllCourses()
           .then(courses => {
           this.setState({...this.state, courses:courses})
-          console.log(courses)
         })
   addCourse = () => {
     const newCourse = {
