@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import EditableItem from '../editable-item'
+import {useParams} from  'react-router-dom'
 
 const ModuleList = ({ 
     myModules = [], 
@@ -8,12 +9,14 @@ const ModuleList = ({
     deleteModule,
     updateModule
 }) => {
+    const {courseId, moduleId} = useParams();
     return (
         <div>
             <ul className="list-group">
                 {myModules.map((module) => (
                     <li className="list-group-item">
                         <EditableItem 
+                        to={`/courses/editor/${courseId}/${module._id}`}
                         deleteItem={deleteModule}
                         updateItem={updateModule}
                         item = {module}/>
