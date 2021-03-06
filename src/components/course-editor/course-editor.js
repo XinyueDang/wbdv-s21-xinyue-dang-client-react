@@ -18,7 +18,7 @@ const reducer = combineReducers({
 
 const store = createStore(reducer)
 
-const CourseEditor = ({ history }) => {
+const CourseEditor = ({ history, location }) => {
     const {courseId, moduleId} = useParams();
     return (
         <Provider store={store}>
@@ -36,7 +36,7 @@ const CourseEditor = ({ history }) => {
                             </Link>
                         </div>
                         <div className="col-3 page-header">
-                            <h5>CS5610-WebDev</h5>
+                            <h5>{location.title}</h5>
                         </div>
                         <div className="col-7">
                             <ul className="nav nav-tabs header-tab">

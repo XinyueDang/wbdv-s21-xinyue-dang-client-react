@@ -11,17 +11,19 @@ const LessonTabs = ({
     deleteLesson,
     findLessonsForModule,
 }) => {
-    console.log('1',lessons)
-    const { courseId, moduleId } = useParams()
+    const { courseId, moduleId, lessonId } = useParams()
     useEffect(() => {
-        findLessonsForModule(moduleId)
-    }, [])
+        if(moduleId !== "undefined" && typeof moduleId !== "undefined") {
+            findLessonsForModule(moduleId)
+        }
+    }, [moduleId])
     return (
         <>
             <ul className="nav nav-tabs">
                 {lessons.map((lesson) => (
                     <li className="nav-item">
                         <EditableItem
+                            active={lesson._id === lessonId}
                             to={`/courses/editor/${courseId}/${moduleId}/${lesson._id}`}
                             deleteItem={deleteLesson}
                             updateItem={updateLesson}
@@ -31,7 +33,9 @@ const LessonTabs = ({
                 ))}
                 <li className="nav-item">
                     <i
-                        onClick= {() => {createLesson(moduleId)}}
+                        onClick={() => {
+                            createLesson(moduleId)
+                        }}
                         className="fas fa-plus"
                     ></i>
                 </li>

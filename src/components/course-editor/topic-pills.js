@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {connect} from 'react-redux'
 import EditableItem from '../editable-item'
 import {useParams} from 'react-router-dom'
@@ -11,13 +11,19 @@ const TopicPills = ({
     findTopicsForLesson,
     topics=[]
 }) => {
-    const{courseId, moduleId, lessonId} = useParams()
+    const{courseId, moduleId, lessonId, topicId} = useParams()
+    useEffect(() => {
+        if(lessonId !== "undefined" && typeof lessonId !== "undefined") {
+            findTopicsForLesson(lessonId)
+        }
+    }, [lessonId])
     return (
         <ul className="nav nav-pills">
             {
             topics.map(topic => 
                 <li className="nav-item">
                     <EditableItem 
+                    active={topic._id === topicId}
                     to = {`/courses/editor/${courseId}/${moduleId}/${lessonId}/${topic._id}`}
                     item={topic}
                     deleteItem={deleteTopic}
@@ -27,7 +33,7 @@ const TopicPills = ({
             )}
             <li className="nav-item">
                     <i
-                        onClick= {() => {createTopic(moduleId)}}
+                        onClick= {() => {createTopic(lessonId)}}
                         className="fas fa-plus"
                     ></i>
                 </li>

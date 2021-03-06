@@ -35,7 +35,7 @@ const topicReducer = (state=initialState, action) => {
             return newStateU
         case "DELETE_TOPIC":
             const newStateD={
-                topics: state.lessons.filter((topic) => {
+                topics: state.topics.filter((topic) => {
                     if (topic._id === action.topicToDelete._id) {
                         return false
                     } else {

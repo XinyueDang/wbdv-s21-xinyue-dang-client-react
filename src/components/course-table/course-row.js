@@ -27,7 +27,7 @@ const CourseRow = (
         <td>
             {
                 !editing &&
-                <Link to={`/courses/editor/${course._id}`}>
+                <Link to={{pathname:`/courses/editor/${course._id}`, title:title}}>
                     {title}
                 </Link>
             }
