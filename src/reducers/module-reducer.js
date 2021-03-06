@@ -1,28 +1,32 @@
 import React from 'react'
-import CourseEditor from '../components/course-editor/course-editor'
+// import CourseEditor from '../components/course-editor/course-editor'
 
 const initialState = {
     modules: [
-        { _id: 123, title: 'Module 123' },
-        { _id: 234, title: 'Module 234' },
-        { _id: 345, title: 'Module 345' },
+        // { _id: 123, title: 'Module 123' },
+        // { _id: 234, title: 'Module 234' },
+        // { _id: 345, title: 'Module 345' },
     ],
 }
 
 const moduleReducer = (state = initialState, action) => {
+    console.log('mo',state)
     switch (action.type) {
         case 'CREATE_MODULE':
             const newState = {
                 modules: [
                     ...state.modules,
-                    {
-                        title: 'new module',
-                        _id: new Date().getTime(),
-                    },
+                    action.module
                 ],
             }
             return newState
         case 'FIND_MODULES_FOR_COURSE':
+            const newStateA = {
+                ...state,
+                modules: action.modules
+            }
+            return newStateA
+
         case 'FIND_MODULE':
         case 'UPDATE_MODULE':
             const newStateU = {

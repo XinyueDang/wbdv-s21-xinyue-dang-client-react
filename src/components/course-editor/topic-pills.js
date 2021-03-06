@@ -2,10 +2,13 @@ import React from 'react'
 import {connect} from 'react-redux'
 import EditableItem from '../editable-item'
 import {useParams} from 'react-router-dom'
+import topicService from '../../services/topic-service'
 
 const TopicPills = ({
     deleteTopic,
     updateTopic,
+    createTopic,
+    findTopicsForLesson,
     topics=[]
 }) => {
     const{courseId, moduleId, lessonId} = useParams()
@@ -22,6 +25,12 @@ const TopicPills = ({
                     />
                 </li>
             )}
+            <li className="nav-item">
+                    <i
+                        onClick= {() => {createTopic(moduleId)}}
+                        className="fas fa-plus"
+                    ></i>
+                </li>
         </ul>
     )
 }
@@ -33,14 +42,38 @@ const stpm = (state) => {
 }
 const dtpm = (dispatch) => {
     return {
-        deleteTopic: (item) => dispatch({ 
-                                type: 'DELETE_TOPIC', 
-                                topicToDelete: item
-                        }),
-        updateTopic: (item) => dispatch({
-                                type: 'UPDATE_TOPIC', 
-                                topicToUpdate: item
-        })
+        createTopic: (lessonId) => {
+            topicService
+                .createTopic(lessonId, { title: 'New Topic' })
+                .then((theActualTopic) =>
+                    dispatch({
+                        type: 'CREATE_TOPIC',
+                        topic: theActualTopic,
+                    })
+                )
+        },
+        deleteTopic: (item) => {
+            topicService.deleteTopic(item._id).then((status) =>
+                dispatch({
+                    type: 'DELETE_TOPIC',
+                    topicToDelete: item,
+                })
+            )
+        },
+        updateTopic: (topic) =>
+        topicService.updateTopic(topic._id, topic).then((status) =>
+            dispatch({
+                type: 'UPDATE_TOPIC',
+                topicToUpdate: topic,
+            })
+        ),
+        findTopicsForLesson: (lessonId) =>
+            topicService.findTopicsForLesson(lessonId).then((theTopics) =>
+                dispatch({
+                    type: 'FIND_TOPICS_FOR_LESSON',
+                    topics: theTopics,
+                })
+            ),
 }}
 
 export default connect(stpm, dtpm)(TopicPills)

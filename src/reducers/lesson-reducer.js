@@ -1,17 +1,26 @@
 import React from 'react'
 
 const initialState = {
-    lessons: [
-        { _id: 123, title: 'Lesson 123' },
-        { _id: 234, title: 'Lesson 234' },
-        { _id: 345, title: 'Lesson 345' },
-    ],
+    lessons: [1,2],
 }
 
 const lessonReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'CEATE_LESSON':
-        case 'FIND_LESSONS_FOR_COURSE':
+        case 'CREATE_LESSON':
+            const newState = {
+                ...state,
+                lessons: [
+                    ...state.lessons,
+                    action.lesson
+                ]
+            }
+            return newState
+        case 'FIND_LESSONS_FOR_MODULE':
+            const newStateA = {
+                ...state,
+                lessons: action.lessons
+            }
+            return newStateA
         case 'FIND_LESSON':
         case 'UPDATE_LESSON':
             const newStateU = {
