@@ -32,7 +32,7 @@ const EditableItem = ({
                     {setEditing(false)
                     updateItem(itemCache)
                     }} className="fas fa-check"></i>
-                <i onClick={()=>deleteItem(item)} className="fas fa-times"></i>
+                <i onClick={()=>{deleteItem(item); setEditing(false)}} className="fas fa-times"></i>
             </>
             }
         </>

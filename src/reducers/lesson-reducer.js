@@ -1,7 +1,7 @@
 import React from 'react'
 
 const initialState = {
-    lessons: [1,2],
+    lessons: [],
 }
 
 const lessonReducer = (state = initialState, action) => {

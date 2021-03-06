@@ -43,7 +43,7 @@ const CourseCard = (
                     }
                 </div>
                 <p className="card-text">Descriptions</p>
-                <Link to={`/courses/editor/${course._id}`} className="btn btn-primary">
+                <Link to={`/courses/grid/editor/${course._id}`} className="btn btn-primary">
                     {course.title}
                 </Link>
                 {!editing && <i onClick={() => {setEditing(true)}} className="fas fa-edit"></i>}

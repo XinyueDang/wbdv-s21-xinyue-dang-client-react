@@ -11,7 +11,7 @@ const ModuleList = ({
     updateModule,
     findModulesForCourse,
 }) => {
-    const { courseId } = useParams()
+    const { layout, courseId } = useParams()
     useEffect(() => {
         findModulesForCourse(courseId)
     }, [])
@@ -19,11 +19,12 @@ const ModuleList = ({
         <div>
             <ul className="list-group">
                 {myModules.map((module) => (
-                    <li className="list-group-item">
+                    <li className="list-group-item" key={module._id}>
                         <EditableItem
-                            to={`/courses/editor/${courseId}/${module._id}`}
+                            to={`/courses/${layout}/editor/${courseId}/${module._id}`}
                             deleteItem={deleteModule}
                             updateItem={updateModule}
+                            active={true}
                             item={module}
                         />
                     </li>
