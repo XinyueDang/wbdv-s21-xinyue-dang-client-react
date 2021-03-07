@@ -7,7 +7,7 @@ function App() {
   return (
       <BrowserRouter>
         <div className="container-fluid">
-            <Route path="/" exact={true}>
+            <Route path="/" exact>
                 <Home/>
             </Route>
             <Route path="/courses">

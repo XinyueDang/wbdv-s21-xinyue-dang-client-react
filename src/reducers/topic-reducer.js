@@ -1,28 +1,25 @@
 import React from 'react'
 
 const initialState = {
-    topics:[]
+    topics: [],
 }
 
-const topicReducer = (state=initialState, action) => {
-    switch(action.type){
-        case "CREATE_TOPIC":
+const topicReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case 'CREATE_TOPIC':
             const newState = {
                 ...state,
-                topics: [
-                    ...state.topics,
-                    action.topic
-                ]
+                topics: [...state.topics, action.topic],
             }
             return newState
-        case "FIND_TOPICS_FOR_LESSON":
+        case 'FIND_TOPICS_FOR_LESSON':
             const newStateA = {
                 ...state,
-                topics: action.topics
+                topics: action.topics,
             }
             return newStateA
-        case "FIND_TOPIC":
-        case "UPDATE_TOPIC":
+        case 'FIND_TOPIC':
+        case 'UPDATE_TOPIC':
             const newStateU = {
                 topics: state.topics.map((t) => {
                     if (t._id === action.topicToUpdate._id) {
@@ -33,8 +30,8 @@ const topicReducer = (state=initialState, action) => {
                 }),
             }
             return newStateU
-        case "DELETE_TOPIC":
-            const newStateD={
+        case 'DELETE_TOPIC':
+            const newStateD = {
                 topics: state.topics.filter((topic) => {
                     if (topic._id === action.topicToDelete._id) {
                         return false
@@ -44,6 +41,12 @@ const topicReducer = (state=initialState, action) => {
                 }),
             }
             return newStateD
+        case 'CLEAR_TOPIC':
+            const newStateC = {
+                ...state,
+                topics: [],
+            }
+            return newStateC
         default:
             return state
     }

@@ -28,7 +28,7 @@ const CourseEditor = ({ history, location }) => {
                         <div className="col-1 nav-btn">
                             <i
                                 className="fa fa-times fa-2x"
-                                onClick={() => history.goBack()}
+                                onClick={() => history.push(`/courses/${layout}`)}
                             ></i>
                             &nbsp;
                             <Link to="/">
@@ -100,11 +100,11 @@ const CourseEditor = ({ history, location }) => {
 
                 <div className="row">
                     <div className="col-4">
-                        <ModuleList />
+                        <ModuleList title={location.title}/>
                     </div>
                     <div className="col-8">
-                        <LessonTabs />
-                        <TopicPills />
+                        <LessonTabs title={location.title}/>
+                        <TopicPills title={location.title}/>
                     </div>
                 </div>
             </div>

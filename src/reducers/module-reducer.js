@@ -2,7 +2,7 @@ import React from 'react'
 // import CourseEditor from '../components/course-editor/course-editor'
 
 const initialState = {
-    modules: [],
+    modules: []
 }
 
 const moduleReducer = (state = initialState, action) => {
@@ -18,7 +18,7 @@ const moduleReducer = (state = initialState, action) => {
         case 'FIND_MODULES_FOR_COURSE':
             const newStateA = {
                 ...state,
-                modules: action.modules
+                modules: action.modules,
             }
             return newStateA
 

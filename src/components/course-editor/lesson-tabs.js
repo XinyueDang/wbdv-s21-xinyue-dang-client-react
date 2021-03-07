@@ -3,44 +3,61 @@ import { connect } from 'react-redux'
 import EditableItem from '../editable-item'
 import { useParams } from 'react-router-dom'
 import lessonService from '../../services/lesson-service'
+import './lesson-tabs.css'
 
 const LessonTabs = ({
     lessons = [],
+    title,
     createLesson,
     updateLesson,
     deleteLesson,
     findLessonsForModule,
+    clearLesson,
 }) => {
     const { layout, courseId, moduleId, lessonId } = useParams()
     useEffect(() => {
-        if(moduleId !== "undefined" && typeof moduleId !== "undefined") {
+        if (moduleId !== 'undefined' && typeof moduleId !== 'undefined') {
             findLessonsForModule(moduleId)
         }
     }, [moduleId])
+
+    useEffect(() => {
+        if (courseId !== 'undefined' && typeof courseId !== 'undefined') {
+            clearLesson()
+        }
+    }, [courseId])
     return (
-        <>
-            <ul className="nav nav-tabs">
-                {lessons.map((lesson) => (
-                    <li className="nav-item" key={lesson._id}>
-                        <EditableItem
-                            active={lesson._id === lessonId}
-                            to={`/courses/${layout}/editor/${courseId}/${moduleId}/${lesson._id}`}
-                            deleteItem={deleteLesson}
-                            updateItem={updateLesson}
-                            item={lesson}
-                        />
-                    </li>
-                ))}
-                <li className="nav-item">
-                    <i
-                        onClick={() => {
-                            createLesson(moduleId)
-                        }}
-                        className="fas fa-plus"
-                    ></i>
-                </li>
-            </ul>
-        </>
+        <div className="row">
+            <div className="col-11">
+                <ul className="nav nav-tabs">
+                    {lessons.map((lesson) => (
+                        <li
+                            className={`nav-item ${
+                                lessonId === lesson._id ? 'active' : ''
+                            }`}
+                            key={lesson._id}
+                        >
+                            <EditableItem
+                                title={title}
+                                active={lesson._id === lessonId}
+                                to={`/courses/${layout}/editor/${courseId}/${moduleId}/${lesson._id}`}
+                                deleteItem={deleteLesson}
+                                updateItem={updateLesson}
+                                item={lesson}
+                            />
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div className="col-1">
+                <i
+                    onClick={() => {
+                        createLesson(moduleId)
+                    }}
+                    className="fas fa-plus"
+                />
+            </div>
+        </div>
     )
 }
 
@@ -83,6 +100,11 @@ const dtpm = (dispatch) => {
                     lessons: theLessons,
                 })
             ),
+        clearLesson: () =>
+            dispatch({
+                type: 'CLEAR_LESSON',
+                lessons: [],
+            }),
     }
 }
 

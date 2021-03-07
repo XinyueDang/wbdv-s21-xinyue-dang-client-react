@@ -2,10 +2,12 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom';
 
 const EditableItem = ({
+    title,
     to="/",
     deleteItem,
     updateItem,
-    item = {title:"some", _id:"ABC"}
+    item = {title:"some", _id:"ABC"},
+    active
 }) => {
     const [editing, setEditing] = useState(false)
     const [itemCache, setItemCache] = useState(item)
@@ -14,7 +16,7 @@ const EditableItem = ({
             {
                 !editing &&
             <>
-                <Link className="nav-link" to={to}>
+                <Link className={`nav-link ${active?'active':''}`} to={{pathname:to, title:title}}>
                     {item.title}
                 </Link>
                 <i onClick = {() => setEditing(true)} className="fas fa-edit"></i>
