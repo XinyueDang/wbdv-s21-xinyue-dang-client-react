@@ -7,7 +7,6 @@ import './module-list.css'
 
 const ModuleList = ({
     myModules = [],
-    title,
     createModule,
     deleteModule,
     updateModule,
@@ -28,7 +27,6 @@ const ModuleList = ({
                         key={module._id}
                     >
                         <EditableItem
-                            title={title}
                             to={`/courses/${layout}/editor/${courseId}/${module._id}`}
                             deleteItem={deleteModule}
                             updateItem={updateModule}

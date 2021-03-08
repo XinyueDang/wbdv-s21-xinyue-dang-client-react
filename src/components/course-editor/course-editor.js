@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import './course-editor.css'
 import { Link, useParams } from 'react-router-dom'
 import { combineReducers, createStore } from 'redux'
 import { Provider } from 'react-redux'
+import courseService from '../../services/course-service'
 import ModuleList from './module-list'
 import moduleReducer from '../../reducers/module-reducer'
 import LessonTabs from './lesson-tabs'
@@ -18,8 +19,13 @@ const reducer = combineReducers({
 
 const store = createStore(reducer)
 
-const CourseEditor = ({ history, location }) => {
-    const {layout} = useParams();
+const CourseEditor = ({ history}) => {
+    const {layout, courseId} = useParams();
+    const [courseTitle, setCourseTitle] = useState("");
+    useEffect(()=>{
+        courseService.findCourseById(courseId)
+            .then((res)=>{setCourseTitle(res.title)})
+    }, []);
     return (
         <Provider store={store}>
             <div>
@@ -36,7 +42,7 @@ const CourseEditor = ({ history, location }) => {
                             </Link>
                         </div>
                         <div className="col-3 page-header">
-                            <h5>{location.title}</h5>
+                            <h5>{courseTitle}</h5>
                         </div>
                         <div className="col-7">
                             <ul className="nav nav-tabs header-tab">
@@ -100,11 +106,11 @@ const CourseEditor = ({ history, location }) => {
 
                 <div className="row">
                     <div className="col-4">
-                        <ModuleList title={location.title}/>
+                        <ModuleList/>
                     </div>
                     <div className="col-8">
-                        <LessonTabs title={location.title}/>
-                        <TopicPills title={location.title}/>
+                        <LessonTabs/>
+                        <TopicPills/>
                     </div>
                 </div>
             </div>

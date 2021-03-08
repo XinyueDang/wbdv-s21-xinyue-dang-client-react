@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom';
 
 const EditableItem = ({
-    title,
     to="/",
     deleteItem,
     updateItem,
@@ -16,7 +15,7 @@ const EditableItem = ({
             {
                 !editing &&
             <>
-                <Link className={`nav-link ${active?'active':''}`} to={{pathname:to, title:title}}>
+                <Link className={`nav-link ${active?'active':''}`} to={to}>
                     {item.title}
                 </Link>
                 <i onClick = {() => setEditing(true)} className="fas fa-edit"></i>

@@ -18,14 +18,11 @@ const LessonTabs = ({
     useEffect(() => {
         if (moduleId !== 'undefined' && typeof moduleId !== 'undefined') {
             findLessonsForModule(moduleId)
+        }else{
+            clearLesson()
         }
     }, [moduleId])
 
-    useEffect(() => {
-        if (courseId !== 'undefined' && typeof courseId !== 'undefined') {
-            clearLesson()
-        }
-    }, [courseId])
     return (
         <div className="row">
             <div className="col-11">

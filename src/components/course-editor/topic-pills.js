@@ -17,15 +17,11 @@ const TopicPills = ({
     useEffect(() => {
         if (lessonId !== 'undefined' && typeof lessonId !== 'undefined') {
             findTopicsForLesson(lessonId)
-        }
-    }, [lessonId])
-
-    useEffect(() => {
-        console.log('use')
-        if (moduleId !== 'undefined' && typeof moduleId !== 'undefined') {
+        }else{
             clearTopic()
         }
-    }, [moduleId])
+    }, [lessonId])
+    
     return (
         <div className="row">
             <div className="col-11">
