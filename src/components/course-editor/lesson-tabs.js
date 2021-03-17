@@ -7,7 +7,6 @@ import './lesson-tabs.css'
 
 const LessonTabs = ({
     lessons = [],
-    title,
     createLesson,
     updateLesson,
     deleteLesson,
@@ -35,7 +34,6 @@ const LessonTabs = ({
                             key={lesson._id}
                         >
                             <EditableItem
-                                title={title}
                                 active={lesson._id === lessonId}
                                 to={`/courses/${layout}/editor/${courseId}/${moduleId}/${lesson._id}`}
                                 deleteItem={deleteLesson}

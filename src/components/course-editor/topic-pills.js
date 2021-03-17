@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom'
 import topicService from '../../services/topic-service'
 
 const TopicPills = ({
-    title,
     deleteTopic,
     updateTopic,
     createTopic,
@@ -21,7 +20,7 @@ const TopicPills = ({
             clearTopic()
         }
     }, [lessonId])
-    
+
     return (
         <div className="row">
             <div className="col-11">
@@ -29,7 +28,6 @@ const TopicPills = ({
                     {topics.map((topic) => (
                         <li className={`nav-item`} key={topic._id}>
                             <EditableItem
-                                title={title}
                                 to={`/courses/${layout}/editor/${courseId}/${moduleId}/${lessonId}/${topic._id}`}
                                 item={topic}
                                 active={topic._id === topicId}
