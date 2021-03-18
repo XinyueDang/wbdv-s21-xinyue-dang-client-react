@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import widgetService from '../../services/widget-service'
-import HeadingWidget from "./heading-widget";
-import ParagraphWidget from "./paragraph-widget";
+import HeadingWidget from './heading-widget'
+import ParagraphWidget from './paragraph-widget'
 
 const WidgetList = ({
     deleteWidget,
@@ -13,55 +13,47 @@ const WidgetList = ({
     widgets = [],
     clearWidget,
 }) => {
-    // TODO: move state management to widgets-reducer.js
-    const {topicId} = useParams();
-    const [editingWidget, setEditingWidget] = useState({});
+    const { topicId } = useParams()
+    const [widget, setWidget] = useState({})
     useEffect(() => {
         if (topicId !== 'undefined' && typeof topicId !== 'undefined') {
             findWidgetsForTopic(topicId)
-        }else{
+        } else {
             clearWidget()
         }
     }, [topicId])
-    
-    return(
+
+    return (
         <div>
-            <i onClick={createWidget} className="fas fa-plus float-right"></i>
+            <i
+                onClick={() => {
+                    createWidget(topicId)
+                }}
+                className="fas fa-plus float-right"
+            ></i>
             <h4>Widget List </h4>
             <ul className="list-group">
-                {
-                    widgets.map(widget =>
-                    <li className="list-group-item" key={widget.id}>
-                        {
-                            editingWidget.id === widget.id &&
-                                <>
-                                    <i onClick={() => {
-                                        updateWidget(widget.id, editingWidget)
-                                    }} className="fas fa-check float-right"></i>
-                                    <i onClick={() => deleteWidget(widget.id)} className="fas fa-trash float-right"></i>
-                                </>
-                        }
-                        {
-                            editingWidget.id !== widget.id &&
-                            <i onClick={() => setEditingWidget(widget)} className="fas fa-cog float-right"></i>
-                        }
-                        {
-                            widget.type === "HEADING" &&
+                {widgets.map((_widget) => (
+                    <li key={_widget.id} className="list-group-item">
+                        {_widget.type === 'HEADING' && (
                             <HeadingWidget
-                                editing={editingWidget.id === widget.id}
-                                widget={widget}/>
-                        }
-                        {
-                            widget.type === "PARAGRAPH" &&
+                                targetId={widget}
+                                item ={_widget}
+                                updateWidget={updateWidget}
+                                deleteWidget={deleteWidget}
+                            />
+                        )}
+                        {_widget.type === 'PARAGRAPH' && (
                             <ParagraphWidget
-                                editing={editingWidget.id === widget.id}
-                                widget={widget}/>
-                        }
+                                flag={_widget.id === widget.id}
+                                item={_widget}
+                                updateWidget={updateWidget}
+                                deleteWidget={deleteWidget}
+                            />
+                        )}
                     </li>
-                    )
-                }
+                ))}
             </ul>
-            {JSON.stringify(widgets)}
         </div>
     )
 }
@@ -75,7 +67,11 @@ const dtpm = (dispatch) => {
     return {
         createWidget: (topicId) => {
             widgetService
-                .createWidget(topicId, { title: 'New Widget' })
+                .createWidget(topicId, {
+                    type: 'PARAGRAPH',
+                    size: 6,
+                    text: 'New Widget',
+                })
                 .then((theActualWidget) =>
                     dispatch({
                         type: 'CREATE_WIDGET',
@@ -84,24 +80,26 @@ const dtpm = (dispatch) => {
                 )
         },
         deleteWidget: (item) => {
-            widgetService.deleteWidget(item._id).then((status) =>
+            widgetService.deleteWidget(item.id).then((status) =>
                 dispatch({
                     type: 'DELETE_WIDGET',
                     widgetToDelete: item,
                 })
             )
         },
-        updateWidget: (widget) =>
-            widgetService.updateWidget(widget._id, widget).then((status) =>
+        updateWidget: (widget) => {
+            widgetService.updateWidget(widget).then((status) =>
                 dispatch({
                     type: 'UPDATE_WIDGET',
                     widgetToUpdate: widget,
                 })
-            ),
+            )
+        },
+
         findWidgetsForTopic: (topicId) =>
             widgetService.findWidgetsForTopic(topicId).then((theWidgets) =>
                 dispatch({
-                    type: 'FIND_WIDGETS_FOR_TOPIC',
+                    type: 'FIND_ALL_WIDGETS_FOR_TOPIC',
                     widgets: theWidgets,
                 })
             ),

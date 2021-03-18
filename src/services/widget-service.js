@@ -1,7 +1,7 @@
 const TOPICS_URL =
-    'http://localhost:8080/api/topics'
+    'https://wbdc-s21-xinyue-dang-java.herokuapp.com/api/topics'
 const WIDGETS_URL =
-    'http://localhost:8080/api/widgets'
+    'https://wbdc-s21-xinyue-dang-java.herokuapp.com/api/widgets'
 
 export const createWidget = (tId, widget) =>
     fetch(`${TOPICS_URL}/${tId}/widgets`, {
@@ -12,8 +12,8 @@ export const createWidget = (tId, widget) =>
         },
     }).then((response) => response.json())
 
-export const updateWidget = (wId, widget) =>
-    fetch(`${WIDGETS_URL}/${wId}`, {
+export const updateWidget = (widget) =>
+    fetch(`${WIDGETS_URL}/${widget.id}`, {
         method: 'PUT',
         body: JSON.stringify(widget),
         headers: {
