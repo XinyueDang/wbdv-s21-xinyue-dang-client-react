@@ -87,6 +87,7 @@ const dtpm = (dispatch) => {
                 })
             )
         },
+        
         updateWidget: (widget) => {
             widgetService.updateWidget(widget).then((status) =>
                 dispatch({
