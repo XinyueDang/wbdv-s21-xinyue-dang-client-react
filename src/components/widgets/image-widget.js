@@ -1,37 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import OptionalElement from './optional-element'
 
-const ListWidget = ({ item, updateWidget, deleteWidget }) => {
+const ImageWidget = ({ item, updateWidget, deleteWidget }) => {
     const [editing, setEditing] = useState(false)
     const [itemCache, setItemCache] = useState(item)
     return (
         <>
-            {!editing && 
+            {!editing && (
                 <>
-                    {!!item.widgetOrder && 
-                        <>
-                            <ol>
-                                {item.text.split('\n').map((i) => {
-                                    return <li key={i}>{i}</li>
-                                })}
-                            </ol>
-                        </>
-                    }
-                    {!item.widgetOrder && 
-                        <>
-                            <ul>
-                                {item.text.split('\n').map((i) => {
-                                    return <li key = {i}>{i}</li>
-                                })}
-                            </ul>
-                        </>
-                    }
-                     <i
+                    <img src={item.src}
+                    height={item.height}
+                    width={item.width}/>
+                    <i
                         onClick={() => setEditing(true)}
                         className="fas fa-cog"
                     ></i>
                 </>
-            }
+            )}
             {editing && (
                 <div>
                     <select
@@ -70,4 +55,4 @@ const ListWidget = ({ item, updateWidget, deleteWidget }) => {
     )
 }
 
-export default ListWidget
+export default ImageWidget

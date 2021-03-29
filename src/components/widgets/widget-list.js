@@ -5,6 +5,7 @@ import widgetService from '../../services/widget-service'
 import HeadingWidget from './heading-widget'
 import ParagraphWidget from './paragraph-widget'
 import ListWidget from './list-widget'
+import ImageWidget from './image-widget'
 
 const WidgetList = ({
     deleteWidget,
@@ -52,6 +53,13 @@ const WidgetList = ({
                         )}
                         {_widget.type === 'LISTWIDGET' && (
                             <ListWidget
+                                item={_widget}
+                                updateWidget={updateWidget}
+                                deleteWidget={deleteWidget}
+                            />
+                        )}
+                        {_widget.type === 'IMAGEWIDGET' && (
+                            <ImageWidget
                                 item={_widget}
                                 updateWidget={updateWidget}
                                 deleteWidget={deleteWidget}

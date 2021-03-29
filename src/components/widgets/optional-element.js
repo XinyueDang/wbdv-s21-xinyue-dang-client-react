@@ -47,7 +47,7 @@ const OptionalElement = ({ item, setItem }) => {
                     />
                 </>
             )}
-            {item.type == 'LISTWIDGET' && 
+            {item.type == 'LISTWIDGET' && (
                 <>
                     <div className="form-check">
                         <input
@@ -57,16 +57,12 @@ const OptionalElement = ({ item, setItem }) => {
                             onChange={(e) => {
                                 setItem({
                                     ...item,
-                                    widgetOrder: e.target.checked ? 1 : 0
+                                    widgetOrder: e.target.checked ? 1 : 0,
                                 })
                             }}
-                            checked = {item.widgetOrder=== 1? true: false}
+                            checked={item.widgetOrder === 1 ? true : false}
                         />
-                        <label
-                            className="form-check-label"
-                        >
-                            Ordered
-                        </label>
+                        <label className="form-check-label">Ordered</label>
                     </div>
                     <h6>List Items</h6>
                     <textarea
@@ -79,7 +75,44 @@ const OptionalElement = ({ item, setItem }) => {
                         value={item.text}
                     />
                 </>
-            }
+            )}
+            {item.type == 'IMAGEWIDGET' && (
+                <>
+                <label>Image URL</label>
+                    <input
+                        onChange={(e) => {
+                            setItem({
+                                ...item,
+                                src: e.target.value,
+                            })
+                        }}
+                        value={item.src}
+                        className="form-control"
+                    />
+                    <label>Image Width</label>
+                    <input
+                        onChange={(e) => {
+                            setItem({
+                                ...item,
+                                width: e.target.value,
+                            })
+                        }}
+                        value={item.width}
+                        className="form-control"
+                    />
+                    <label>Image Height</label>
+                    <input
+                        onChange={(e) => {
+                            setItem({
+                                ...item,
+                                height: e.target.value,
+                            })
+                        }}
+                        value={item.height}
+                        className="form-control"
+                    />
+                </>
+            )}
         </>
     )
 }

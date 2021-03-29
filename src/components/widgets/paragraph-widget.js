@@ -30,6 +30,7 @@ const ParagraphWidget = ({ item, updateWidget, deleteWidget }) => {
                         <option value={'HEADING'}>Heading</option>
                         <option value={'PARAGRAPH'}>Paragraph</option>
                         <option value={'LISTWIDGET'}>List Widget</option>
+                        <option value={'IMAGEWIDGET'}>Image Widget</option>
                     </select>
                     <OptionalElement item={itemCache} setItem={setItemCache} />
                     <i
