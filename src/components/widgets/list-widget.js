@@ -1,41 +1,46 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import OptionalElement from './optional-element'
 
-const HeadingWidget = ({
-    item,
-    updateWidget,
-    deleteWidget,
-}) => {
+const ListWidget = ({ item, updateWidget, deleteWidget }) => {
     const [editing, setEditing] = useState(false)
     const [itemCache, setItemCache] = useState(item)
-    const handleChange = (e) => {
-        const new_type = {
-            ...itemCache,
-            type: e.target.value,
-        }
-        setItemCache(new_type)
-    }
     return (
         <>
-            {!editing && (
+            {!editing && 
                 <>
-                    {item.size === 1 && <h1>{item.text}</h1>}
-                    {item.size === 2 && <h2>{item.text}</h2>}
-                    {item.size === 3 && <h3>{item.text}</h3>}
-                    {item.size === 4 && <h4>{item.text}</h4>}
-                    {item.size === 5 && <h5>{item.text}</h5>}
-                    {item.size === 6 && <h6>{item.text}</h6>}
-                    <i
+                    {!!item.widgetOrder && 
+                        <>
+                            <ol>
+                                {item.text.split('\n').map((i) => {
+                                    return <li key={i}>{i}</li>
+                                })}
+                            </ol>
+                        </>
+                    }
+                    {!item.widgetOrder && 
+                        <>
+                            <ul>
+                                {item.text.split('\n').map((i) => {
+                                    return <li key = {i}>{i}</li>
+                                })}
+                            </ul>
+                        </>
+                    }
+                     <i
                         onClick={() => setEditing(true)}
                         className="fas fa-cog"
                     ></i>
                 </>
-            )}
-
+            }
             {editing && (
                 <div>
                     <select
-                        onChange={handleChange}
+                        onChange={(e) => {
+                            setItemCache({
+                                ...itemCache,
+                                type: e.target.value,
+                            })
+                        }}
                         value={itemCache.type}
                         className="form-control"
                     >
@@ -64,4 +69,4 @@ const HeadingWidget = ({
     )
 }
 
-export default HeadingWidget
+export default ListWidget

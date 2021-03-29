@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import OptionalElement from './optional-element'
 
 const ParagraphWidget = ({ item, updateWidget, deleteWidget }) => {
     const [editing, setEditing] = useState(false)
@@ -28,51 +29,9 @@ const ParagraphWidget = ({ item, updateWidget, deleteWidget }) => {
                     >
                         <option value={'HEADING'}>Heading</option>
                         <option value={'PARAGRAPH'}>Paragraph</option>
+                        <option value={'LISTWIDGET'}>List Widget</option>
                     </select>
-                    {itemCache.type == 'HEADING' && (
-                        <>
-                            <input
-                                onChange={(e) => {
-                                    setItemCache({
-                                        ...itemCache,
-                                        text: e.target.value,
-                                    })
-                                }}
-                                value={itemCache.text}
-                                className="form-control"
-                            />
-                            <select
-                                onChange={(e) => {
-                                    setItemCache({
-                                        ...itemCache,
-                                        size: parseInt(e.target.value),
-                                    })
-                                }}
-                                value={itemCache.size}
-                                className="form-control"
-                            >
-                                <option value={1}>Heading 1</option>
-                                <option value={2}>Heading 2</option>
-                                <option value={3}>Heading 3</option>
-                                <option value={4}>Heading 4</option>
-                                <option value={5}>Heading 5</option>
-                                <option value={6}>Heading 6</option>
-                            </select>
-                        </>
-                    )}
-                    {itemCache.type == 'PARAGRAPH' && (
-                        <>
-                            <textarea
-                                onChange={(e) => {
-                                    setItemCache({
-                                        ...itemCache,
-                                        text: e.target.value,
-                                    })
-                                }}
-                                value={itemCache.text}
-                            />
-                        </>
-                    )}
+                    <OptionalElement item={itemCache} setItem={setItemCache} />
                     <i
                         onClick={() => {
                             setEditing(false)

@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import widgetService from '../../services/widget-service'
 import HeadingWidget from './heading-widget'
 import ParagraphWidget from './paragraph-widget'
+import ListWidget from './list-widget'
 
 const WidgetList = ({
     deleteWidget,
@@ -37,7 +38,6 @@ const WidgetList = ({
                     <li key={_widget.id} className="list-group-item">
                         {_widget.type === 'HEADING' && (
                             <HeadingWidget
-                                targetId={widget}
                                 item ={_widget}
                                 updateWidget={updateWidget}
                                 deleteWidget={deleteWidget}
@@ -45,7 +45,13 @@ const WidgetList = ({
                         )}
                         {_widget.type === 'PARAGRAPH' && (
                             <ParagraphWidget
-                                flag={_widget.id === widget.id}
+                                item={_widget}
+                                updateWidget={updateWidget}
+                                deleteWidget={deleteWidget}
+                            />
+                        )}
+                        {_widget.type === 'LISTWIDGET' && (
+                            <ListWidget
                                 item={_widget}
                                 updateWidget={updateWidget}
                                 deleteWidget={deleteWidget}
