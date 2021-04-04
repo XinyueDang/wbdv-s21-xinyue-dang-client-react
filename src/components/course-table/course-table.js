@@ -18,6 +18,7 @@ export default class CourseTable
                 <th>Title</th>
                 <th className="d-none d-md-table-cell">Owned By</th>
                 <th className="d-none d-lg-table-cell">Last Modified</th>
+                <th>Quizz</th>
                 <th>
                     <i className="fas fa-lg fa-folder"></i>
                     &nbsp;

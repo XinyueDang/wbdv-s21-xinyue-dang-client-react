@@ -5,6 +5,8 @@ import CourseEditor from './course-editor/course-editor'
 import './course-manager.css'
 import { Link, Route } from 'react-router-dom'
 import courseService from '../services/course-service'
+import QuizzesList from '../components/quizzes/quizzes-list'
+import Quiz from '../components/quizzes/quiz'
 
 class CourseManager extends React.Component {
     state = {
@@ -116,6 +118,12 @@ class CourseManager extends React.Component {
                         exact
                         render={(props) => <CourseEditor {...props} />}
                     ></Route>
+                    <Route path="/courses/:courseId/quizzes" exact>
+                        <QuizzesList/>
+                    </Route>
+                    <Route path="/courses/:courseId/quizzes/:quizId" exact>
+                        <Quiz/>
+                    </Route>
                 </div>
             </div>
         )
