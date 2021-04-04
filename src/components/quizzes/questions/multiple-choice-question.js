@@ -2,28 +2,51 @@ import React, { useState } from 'react'
 
 const MultipleChoiceQuestion = ({ question }) => {
     const [answer, setAnswer] = useState(null)
+    const [isCorrect, setCorrect] = useState(undefined)
     function handleClick(){
-        alert("Ok")
+        if (answer && answer === question.correct) {
+            setCorrect(true)
+        } else {
+            setCorrect(false)
+        }
     }
     return (
         <div>
             <h4>
                 {question.question}
-                {answer === question.correct && (
+                {answer === question.correct && 
+                isCorrect !== undefined && (
                     <i className="fas fa-check"></i>
                 )}
-                {answer !== question.correct && (
+                {answer !== question.correct && 
+                isCorrect !== undefined && (
                     <i className="fas fa-times"></i>
                 )}
             </h4>
             <div className="list-group">
                 {question.choices.map((choice) => {
                     return (
-                        <div className="list-group-item" key={choice}>
+                        <div className={`list-group-item ${
+                            isCorrect === undefined
+                                ? ''
+                                : (isCorrect && answer === choice) ||
+                                  (!isCorrect && question.correct === choice)
+                                ? 'list-group-item-success'
+                                : ''
+                        }
+                        ${
+                            isCorrect === undefined
+                                ? ''
+                                : !isCorrect && answer === choice
+                                ? 'list-group-item-danger'
+                                : ''
+                        }`}
+                        
+                        key={choice}>
                             <label>
                                 <input
                                     type="radio"
-                                    onClick={() => setAnswer(choice)}
+                                    onClick={() => {setAnswer(choice); setCorrect(undefined)}}
                                     name={question._id}
                                 />
                                 {choice}

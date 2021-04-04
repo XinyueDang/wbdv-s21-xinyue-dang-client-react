@@ -5,10 +5,8 @@ const TrueFalseQuestion = ({ question }) => {
     const [isCorrect, setCorrect] = useState(undefined)
     function handleClick() {
         if (answer && answer === question.correct) {
-            // alert("true")
             setCorrect(true)
         } else {
-            // alert("false")
             setCorrect(false)
         }
     }
