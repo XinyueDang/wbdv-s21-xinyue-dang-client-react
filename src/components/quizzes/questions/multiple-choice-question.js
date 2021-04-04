@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 
 const MultipleChoiceQuestion = ({ question }) => {
     const [answer, setAnswer] = useState(null)
+    function handleClick(){
+        alert("Ok")
+    }
     return (
         <div>
             <h4>
@@ -16,7 +19,7 @@ const MultipleChoiceQuestion = ({ question }) => {
             <div className="list-group">
                 {question.choices.map((choice) => {
                     return (
-                        <div className="list-group-item">
+                        <div className="list-group-item" key={choice}>
                             <label>
                                 <input
                                     type="radio"
@@ -30,7 +33,7 @@ const MultipleChoiceQuestion = ({ question }) => {
                 })}
             </div>
             <h6>Your Answer: {answer}</h6>
-            <button type="button" class="btn btn-success">
+            <button type="button" className="btn btn-success" onClick={() => handleClick()}>
                 Grade
             </button>
             <br/>
