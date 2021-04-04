@@ -14,13 +14,11 @@ const TrueFalseQuestion = ({ question }) => {
         <div>
             <h4>
                 {question.question}
-                {answer === question.correct && 
-                isCorrect !== undefined && (
-                    <i className="fas fa-check"></i>
+                {answer === question.correct && isCorrect !== undefined && (
+                    <i className="fas fa-check" style={{color:'green'}}></i>
                 )}
-                {answer !== question.correct && 
-                isCorrect !== undefined && (
-                    <i className="fas fa-times"></i>
+                {answer !== question.correct && isCorrect !== undefined && (
+                    <i className="fas fa-times" style={{color:'red'}}></i>
                 )}
             </h4>
             <div className="list-group">
@@ -53,13 +51,32 @@ const TrueFalseQuestion = ({ question }) => {
                         />
                         True
                     </label>
+                    {isCorrect !== undefined && isCorrect && answer === 'true' && (
+                        <>
+                            <i className="fas fa-check"></i>
+                        </>
+                    )}
+                    {isCorrect !== undefined &&
+                        !isCorrect &&
+                        question.correct === 'true' && (
+                            <>
+                                <i className="fas fa-check"></i>
+                            </>
+                        )}
+                    {isCorrect !== undefined &&
+                        !isCorrect &&
+                        answer === 'true' && (
+                            <>
+                                <i className="fas fa-times"></i>
+                            </>
+                        )}
                 </div>
                 <div
                     className={`list-group-item ${
                         isCorrect === undefined
                             ? ''
                             : (isCorrect && answer === 'false') ||
-                            (!isCorrect && question.correct === 'false')
+                              (!isCorrect && question.correct === 'false')
                             ? 'list-group-item-success'
                             : ''
                     }
@@ -83,6 +100,27 @@ const TrueFalseQuestion = ({ question }) => {
                         />
                         False
                     </label>
+                    {isCorrect !== undefined &&
+                        isCorrect &&
+                        answer === 'false' && (
+                            <>
+                                <i className="fas fa-check"></i>
+                            </>
+                        )}
+                    {isCorrect !== undefined &&
+                        !isCorrect &&
+                        question.correct === 'false' && (
+                            <>
+                                <i className="fas fa-check"></i>
+                            </>
+                        )}
+                    {isCorrect !== undefined &&
+                        !isCorrect &&
+                        answer === 'false' && (
+                            <>
+                                <i className="fas fa-times"></i>
+                            </>
+                        )}
                 </div>
             </div>
             <h6>Your Answer: {answer}</h6>

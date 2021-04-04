@@ -16,11 +16,11 @@ const MultipleChoiceQuestion = ({ question }) => {
                 {question.question}
                 {answer === question.correct && 
                 isCorrect !== undefined && (
-                    <i className="fas fa-check"></i>
+                    <i className="fas fa-check" style={{color:'green'}}></i>
                 )}
                 {answer !== question.correct && 
                 isCorrect !== undefined && (
-                    <i className="fas fa-times"></i>
+                    <i className="fas fa-times" style={{color:'red'}}></i>
                 )}
             </h4>
             <div className="list-group">
@@ -51,6 +51,24 @@ const MultipleChoiceQuestion = ({ question }) => {
                                 />
                                 {choice}
                             </label>
+                            {isCorrect !== undefined &&
+                            isCorrect && answer === choice &&
+                            <>
+                                <i className="fas fa-check"></i>
+                            </>
+                            }
+                            {isCorrect !== undefined &&
+                            !isCorrect && question.correct === choice &&
+                            <>
+                                <i className="fas fa-check"></i>
+                            </>
+                            }
+                            {isCorrect !== undefined &&
+                            !isCorrect && answer === choice &&
+                            <>
+                                <i className="fas fa-times"></i>
+                            </>
+                            }
                         </div>
                     )
                 })}
