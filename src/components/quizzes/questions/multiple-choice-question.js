@@ -3,12 +3,14 @@ import React, { useState } from 'react'
 const MultipleChoiceQuestion = ({ question }) => {
     const [answer, setAnswer] = useState(null)
     const [isCorrect, setCorrect] = useState(undefined)
+    const [Answered, setAnswered] = useState(false)
     function handleClick(){
         if (answer && answer === question.correct) {
             setCorrect(true)
         } else {
             setCorrect(false)
         }
+        setAnswered(true)
     }
     return (
         <div>
@@ -48,6 +50,7 @@ const MultipleChoiceQuestion = ({ question }) => {
                                     type="radio"
                                     onClick={() => {setAnswer(choice); setCorrect(undefined)}}
                                     name={question._id}
+                                    disabled = {Answered}
                                 />
                                 {choice}
                             </label>
