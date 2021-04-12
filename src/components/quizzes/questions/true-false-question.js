@@ -3,12 +3,14 @@ import React, { useState } from 'react'
 const TrueFalseQuestion = ({ question }) => {
     const [answer, setAnswer] = useState(null)
     const [isCorrect, setCorrect] = useState(undefined)
+    const [Answered, setAnswered] = useState(false)
     function handleClick() {
         if (answer && answer === question.correct) {
             setCorrect(true)
         } else {
             setCorrect(false)
         }
+        setAnswered(true)
     }
     return (
         <div>
@@ -48,6 +50,7 @@ const TrueFalseQuestion = ({ question }) => {
                             }}
                             name={question._id}
                             key="true"
+                            disabled = {Answered}
                         />
                         True
                     </label>
@@ -97,6 +100,7 @@ const TrueFalseQuestion = ({ question }) => {
                             }}
                             name={question._id}
                             key="false"
+                            disabled = {Answered}
                         />
                         False
                     </label>
