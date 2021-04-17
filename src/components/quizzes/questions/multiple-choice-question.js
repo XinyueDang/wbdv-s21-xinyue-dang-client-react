@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 
 const MultipleChoiceQuestion = ({ question }) => {
-    const [answer, setAnswer] = useState(null)
+    const [answer, setAnswer] = useState(question.answer)
+
     const [isCorrect, setCorrect] = useState(undefined)
     const [Answered, setAnswered] = useState(false)
     function handleClick(){
@@ -48,7 +49,7 @@ const MultipleChoiceQuestion = ({ question }) => {
                             <label>
                                 <input
                                     type="radio"
-                                    onClick={() => {setAnswer(choice); setCorrect(undefined)}}
+                                    onClick={() => {question.answer= choice; setAnswer(choice)}}
                                     name={question._id}
                                     disabled = {Answered}
                                 />
@@ -77,9 +78,9 @@ const MultipleChoiceQuestion = ({ question }) => {
                 })}
             </div>
             <h6>Your Answer: {answer}</h6>
-            <button type="button" className="btn btn-success" onClick={() => handleClick()}>
+            {/* <button type="button" className="btn btn-success" onClick={() => handleClick()}>
                 Grade
-            </button>
+            </button> */}
             <br/>
             <br/>
         </div>

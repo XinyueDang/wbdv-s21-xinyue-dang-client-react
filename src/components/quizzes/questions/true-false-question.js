@@ -45,8 +45,8 @@ const TrueFalseQuestion = ({ question }) => {
                         <input
                             type="radio"
                             onClick={() => {
-                                setAnswer('true')
-                                setCorrect(undefined)
+                                question.answer ="true"
+                                setAnswer("true")
                             }}
                             name={question._id}
                             key="true"
@@ -95,8 +95,8 @@ const TrueFalseQuestion = ({ question }) => {
                         <input
                             type="radio"
                             onClick={() => {
-                                setAnswer('false')
-                                setCorrect(undefined)
+                                question.answer ="false"
+                                setAnswer("false")
                             }}
                             name={question._id}
                             key="false"
@@ -128,13 +128,13 @@ const TrueFalseQuestion = ({ question }) => {
                 </div>
             </div>
             <h6>Your Answer: {answer}</h6>
-            <button
+            {/* <button
                 type="button"
                 className="btn btn-success"
                 onClick={() => handleClick()}
             >
                 Grade
-            </button>
+            </button> */}
             <br />
             <br />
         </div>
